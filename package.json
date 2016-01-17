@@ -1,0 +1,14 @@
+{
+  "name": "inflected-balls",
+  "version": "0.0.0",
+  "description": "",
+  "author": "",
+  "private": true,
+  "dependencies": {
+    "three": "^0.73.0"
+  },
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "watch": "^0.17.1"
+  }
+}
