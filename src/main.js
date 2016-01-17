@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var BallWorld = require('./sandbox.js');
+    var BallWorld = require('./balls.js');
 
     var app = {
         init: function() {
