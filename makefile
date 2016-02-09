@@ -2,7 +2,7 @@ SRC = $(wildcard ./src/*.js)
 BIN = ./node_modules/.bin
 BUILD = ./build
 
-develop: ./js/src
+develop: ./src
 	@$(BIN)/watch "make assets" $<
 
 assets: browserify

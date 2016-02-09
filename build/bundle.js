@@ -36188,65 +36188,6 @@ if (typeof exports !== 'undefined') {
 }
 
 },{}],2:[function(require,module,exports){
-/**
- * @author mrdoob / http://www.mrdoob.com
- *
- * Simple test shader
- */
-
-module.exports = {
-
-	uniforms: {},
-
-	vertexShader: [
-
-		"void main() {",
-
-			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
-
-		"}"
-
-	].join( "\n" ),
-
-	fragmentShader: [
-
-		"void main() {",
-
-			"gl_FragColor = vec4( 1.0, 0.0, 0.0, 0.5 );",
-
-		"}"
-
-	].join( "\n" )
-
-};
-
-},{}],3:[function(require,module,exports){
-(function() {
-    'use strict';
-
-    var BallWorld = require('./sandbox.js');
-
-    var app = {
-        init: function() {
-            var images = [
-                'test.jpg',
-                'test2.jpg',
-                'test3.jpg',
-                'test4.png',
-                'test5.jpg',
-                'test6.gif',
-            ];
-            this.world = new BallWorld(images);
-            this.world.setup();
-            this.world.animate();
-        }
-    };
-
-    app.init();
-
-}());
-
-},{"./sandbox.js":4}],4:[function(require,module,exports){
 (function() {
     'use strict';
 
@@ -36395,4 +36336,63 @@ module.exports = {
 
 }());
 
-},{"./basic-shader.js":2,"three":1}]},{},[3]);
+},{"./basic-shader.js":3,"three":1}],3:[function(require,module,exports){
+/**
+ * @author mrdoob / http://www.mrdoob.com
+ *
+ * Simple test shader
+ */
+
+module.exports = {
+
+	uniforms: {},
+
+	vertexShader: [
+
+		"void main() {",
+
+			"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+
+		"}"
+
+	].join( "\n" ),
+
+	fragmentShader: [
+
+		"void main() {",
+
+			"gl_FragColor = vec4( 1.0, 0.0, 0.0, 0.5 );",
+
+		"}"
+
+	].join( "\n" )
+
+};
+
+},{}],4:[function(require,module,exports){
+(function() {
+    'use strict';
+
+    var BallWorld = require('./balls.js');
+
+    var app = {
+        init: function() {
+            var images = [
+                'test.jpg',
+                'test2.jpg',
+                'test3.jpg',
+                'test4.png',
+                'test5.jpg',
+                'test6.gif',
+            ];
+            this.world = new BallWorld(images);
+            this.world.setup();
+            this.world.animate();
+        }
+    };
+
+    app.init();
+
+}());
+
+},{"./balls.js":2}]},{},[4]);
