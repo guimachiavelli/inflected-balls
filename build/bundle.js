@@ -36204,7 +36204,7 @@ if (typeof exports !== 'undefined') {
 
     function BallWorld(textures) {
         this.container = document.createElement('div');
-        this.renderer = new THREE.WebGLRenderer();
+        this.renderer = new THREE.WebGLRenderer({alpha: true});
 
         this.textures = this.loadedTextures(textures);
         this.materials = this.generatedMaterials();
@@ -36228,10 +36228,10 @@ if (typeof exports !== 'undefined') {
 
     BallWorld.prototype.generatedBalls = function() {
         var geometry, i, index, material, mesh, balls;
-        geometry = new THREE.SphereGeometry(50, 32, 16);
+        geometry = new THREE.SphereGeometry(90, 32, 32);
         balls = [];
 
-        for (i = 0; i < 5000; i += 1) {
+        for (i = 0; i < 1000; i += 1) {
             index = Math.floor(Math.random() * this.materials.length);
             material = this.materials[index];
 
@@ -36266,7 +36266,7 @@ if (typeof exports !== 'undefined') {
         }
 
         return textures.map(function(texture){
-            texture = 'imgs/' + texture;
+            texture = texture;
             return THREE.ImageUtils.loadTexture(texture);
         });
     };
@@ -36284,9 +36284,8 @@ if (typeof exports !== 'undefined') {
 
     BallWorld.prototype.generatedMaterials = function() {
         var materials = [
-            new THREE.MeshNormalMaterial({ shading: THREE.SmoothShading } ),
             new THREE.MeshBasicMaterial({ color: 0xffaa00, wireframe: true } ),
-            new THREE.MeshBasicMaterial({ color: 0x0066ff,
+            new THREE.MeshBasicMaterial({ color: 0x000bff,
                                         blending: THREE.AdditiveBlending,
                                         transparent: true,
                                         depthWrite: false
@@ -36377,15 +36376,33 @@ module.exports = {
 
     var app = {
         init: function() {
-            var images = [
-                'test.jpg',
-                'test2.jpg',
-                'test3.jpg',
-                'test4.png',
-                'test5.jpg',
-                'test6.gif',
-            ];
-            this.world = new BallWorld(images);
+            this.fetchTextures();
+        },
+
+        fetchTextures: function() {
+            var request;
+
+            request = new XMLHttpRequest();
+            request.open('GET', './imgs.json', true);
+
+            request.onload = this.onLoadedTextures.bind(this, request);
+
+            request.send();
+        },
+
+        onLoadedTextures: function(request) {
+            var textures;
+
+            if (request.status !== 200) {
+                return;
+            }
+
+            this.initWorld(JSON.parse(request.responseText));
+
+        },
+
+        initWorld: function(textures) {
+            this.world = new BallWorld(textures);
             this.world.setup();
             this.world.animate();
         }

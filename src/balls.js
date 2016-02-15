@@ -14,7 +14,7 @@
 
     function BallWorld(textures) {
         this.container = document.createElement('div');
-        this.renderer = new THREE.WebGLRenderer();
+        this.renderer = new THREE.WebGLRenderer({alpha: true});
 
         this.textures = this.loadedTextures(textures);
         this.materials = this.generatedMaterials();
@@ -38,10 +38,10 @@
 
     BallWorld.prototype.generatedBalls = function() {
         var geometry, i, index, material, mesh, balls;
-        geometry = new THREE.SphereGeometry(50, 32, 16);
+        geometry = new THREE.SphereGeometry(90, 32, 32);
         balls = [];
 
-        for (i = 0; i < 5000; i += 1) {
+        for (i = 0; i < 1000; i += 1) {
             index = Math.floor(Math.random() * this.materials.length);
             material = this.materials[index];
 
@@ -76,7 +76,7 @@
         }
 
         return textures.map(function(texture){
-            texture = 'imgs/' + texture;
+            texture = texture;
             return THREE.ImageUtils.loadTexture(texture);
         });
     };
@@ -94,9 +94,8 @@
 
     BallWorld.prototype.generatedMaterials = function() {
         var materials = [
-            new THREE.MeshNormalMaterial({ shading: THREE.SmoothShading } ),
             new THREE.MeshBasicMaterial({ color: 0xffaa00, wireframe: true } ),
-            new THREE.MeshBasicMaterial({ color: 0x0066ff,
+            new THREE.MeshBasicMaterial({ color: 0x000bff,
                                         blending: THREE.AdditiveBlending,
                                         transparent: true,
                                         depthWrite: false
