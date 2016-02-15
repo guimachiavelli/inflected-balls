@@ -6,7 +6,7 @@ def main
     end
 
     entries = entries.map do |img|
-        "img/#{img}"
+        "imgs/#{img}"
     end
 
     File.write('build/imgs.json', JSON.generate(entries))
