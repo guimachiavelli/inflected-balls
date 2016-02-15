@@ -4,8 +4,20 @@
     var BallWorld = require('./balls.js');
 
     var app = {
+        loader: null,
         init: function() {
+            this.showLoadingMessage();
             this.fetchTextures();
+        },
+
+        showLoadingMessage: function() {
+            this.loader = document.createElement('div');
+            this.loader.innerHTML = 'Loading…';
+            document.body.appendChild(this.loader);
+        },
+
+        removeLoadingMessage: function() {
+            document.body.removeChild(this.loader);
         },
 
         fetchTextures: function() {
@@ -26,8 +38,8 @@
                 return;
             }
 
+            this.removeLoadingMessage();
             this.initWorld(JSON.parse(request.responseText));
-
         },
 
         initWorld: function(textures) {
