@@ -1,6 +1,6 @@
 SRC = $(wildcard ./src/*.js)
 BIN = ./node_modules/.bin
-BUILD = ./build
+BUILD = ./public
 
 develop: ./src
 	@$(BIN)/watch "make assets" $<
