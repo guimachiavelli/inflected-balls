@@ -1,3 +1,4 @@
+DEPLOY_TARGET = `cat target.txt`
 SRC = $(wildcard ./src/*.js)
 BIN = ./node_modules/.bin
 BUILD = ./public
@@ -9,3 +10,6 @@ assets: browserify
 
 browserify: ./src/main.js
 	@$(BIN)/browserify $< -o $(BUILD)/bundle.js
+
+deploy:
+	rsync --verbose --progress -r public/* $(DEPLOY_TARGET)
