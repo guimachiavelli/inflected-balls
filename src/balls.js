@@ -11,9 +11,10 @@ var container,
     windowHalfY = window.innerHeight/2;
 
 
-function BallWorld(textures) {
+function BallWorld(textures, amountOfBalls) {
     this.container = document.createElement('div');
     this.renderer = new THREE.WebGLRenderer({alpha: true});
+    this.amountOfBalls = amountOfBalls || 300;
 
     this.textures = this.loadedTextures(textures);
     this.materials = this.generatedMaterials();
@@ -42,7 +43,7 @@ BallWorld.prototype.generatedBalls = function() {
     geometry = new THREE.SphereGeometry(260, 60, 60, 10, 1, 1, 1);
     balls = [];
 
-    for (i = 0; i < 300; i += 1) {
+    for (i = 0; i < this.amountOfBalls; i += 1) {
         index = Math.floor(Math.random() * this.materials.length);
         material = this.materials[index];
 
@@ -60,13 +61,6 @@ BallWorld.prototype.generatedBalls = function() {
 
         this.scene.add(mesh);
     }
-
-    geometry = new THREE.SphereGeometry(1, 3, 3);
-    mesh = new THREE.Mesh(geometry, this.materials[0]);
-    mesh.position.x = 0;
-    mesh.position.y = 0;
-    mesh.position.z = 0;
-    //this.scene.add(mesh);
 
     return balls;
 };
@@ -123,12 +117,6 @@ BallWorld.prototype.onWindowResize = function() {
     this.renderer.setSize( window.innerWidth, window.innerHeight );
 };
 
-
-BallWorld.prototype.onDocumentMouseMove = function(e) {
-    mouseX = (e.clientX - windowHalfX) * 10;
-    mouseY = (e.clientY - windowHalfY) * 10;
-};
-
 BallWorld.prototype.animate = function() {
     requestAnimationFrame(this.animate.bind(this));
     this.render();
@@ -136,20 +124,7 @@ BallWorld.prototype.animate = function() {
 
 BallWorld.prototype.render = function() {
     this.controls.update();
-
     this.renderer.render(this.scene, this.camera);
-};
-
-BallWorld.prototype.onWindowMousewheel = function(e) {
-    var delta;
-
-    e.preventDefault();
-
-    delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-
-    //this.camera.position.x += delta * 20;
-    this.camera.position.y += delta * 20;
-    this.camera.position.z += delta * 20;
 };
 
 module.exports = BallWorld;

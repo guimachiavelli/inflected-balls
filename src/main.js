@@ -38,15 +38,24 @@
                 return;
             }
 
+            textures = JSON.parse(request.responseText);
+
+            if (window.innerWidth < 600) {
+                textures = textures.slice(0, 15);
+            }
+
             this.removeLoadingMessage();
-            this.initWorld(JSON.parse(request.responseText));
+            this.initWorld(textures);
         },
 
         initWorld: function(textures) {
-            this.world = new BallWorld(textures);
+            this.world = new BallWorld(textures,
+                                       Math.floor(window.innerWidth/5));
             this.world.setup();
             this.world.animate();
-        }
+        },
+
+
     };
 
     app.init();

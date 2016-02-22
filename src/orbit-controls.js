@@ -591,21 +591,24 @@ OrbitControls.prototype.onTouchMove = function(event) {
 
     switch (event.touches.length) {
         case 1: // one-fingered touch: rotate
-            if (this.enableRotate === false) {
+            if (this.enableRotate === false ||
+                this.state !== this.STATE.TOUCH_ROTATE) {
                 return;
             }
             this.handleTouchMoveRotate(event);
             break;
 
         case 2: // two-fingered touch: dolly
-            if (this.enableZoom === false) {
+            if (this.enableZoom === false ||
+                this.state !== this.STATE.TOUCH_DOLLY) {
                 return;
             }
             this.handleTouchMoveDolly(event);
             break;
 
         case 3: // three-fingered touch: pan
-            if (this.enablePan === false) {
+            if (this.enablePan === false ||
+                this.state !== this.STATE.TOUCH_PAN) {
                 return;
             }
             this.handleTouchMovePan(event);
