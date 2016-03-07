@@ -6,7 +6,7 @@ resizeImages() {
 
     for img in $imgs
     do
-        convert "$img" -resize 20% ./build/imgs/$i.jpg
+        convert "$img" -resize 20% ./public/imgs/$i.jpg
         ((i++))
     done
 }
