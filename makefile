@@ -10,6 +10,7 @@ assets: browserify
 
 browserify: ./src/main.js
 	@$(BIN)/browserify $< -o $(BUILD)/bundle.js
+	@$(BIN)/uglifyjs $(BUILD)/bundle.js -c -m -o $(BUILD)/bundle.js
 
 deploy:
 	rsync --verbose --progress -r public/* $(DEPLOY_TARGET)
