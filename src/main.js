@@ -13,6 +13,7 @@
         showLoadingMessage: function() {
             this.loader = document.createElement('div');
             this.loader.innerHTML = 'Loading…';
+            this.loader.style.color = 'red';
             document.body.appendChild(this.loader);
         },
 
