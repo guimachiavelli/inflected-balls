@@ -1,7 +1,7 @@
 require 'json'
 
 def main
-    entries = Dir.entries('build/imgs').select do |img|
+    entries = Dir.entries('public/imgs').select do |img|
         File.extname(img) == '.jpg'
     end
 
@@ -9,7 +9,7 @@ def main
         "imgs/#{img}"
     end
 
-    File.write('build/imgs.json', JSON.generate(entries))
+    File.write('public/imgs.json', JSON.generate(entries))
 end
 
 main()
